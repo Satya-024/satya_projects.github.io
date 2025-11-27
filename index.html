@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karnaugh Map (K-Map) Solver</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Karnaugh Map (K-Map) Solver</h1>
+            <p class="subtitle">Interactive Digital Logic Simplification Tool</p>
+        </header>
+
+        <main>
+            <!-- Input Section -->
+            <section class="input-section">
+                <div class="input-card">
+                    <h2>Input Configuration</h2>
+                    
+                    <div class="input-group">
+                        <label for="variables">Number of Variables:</label>
+                        <select id="variables" onchange="updateKMap()">
+                            <option value="2">2 Variables (A, B)</option>
+                            <option value="3" selected>3 Variables (A, B, C)</option>
+                            <option value="4">4 Variables (A, B, C, D)</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="minterms">Minterms (comma-separated):</label>
+                        <input type="text" id="minterms" placeholder="e.g., 1,2,5,6" value="1,2,5,6">
+                    </div>
+
+                    <div class="button-group">
+                        <button class="btn btn-primary" onclick="solveKMap()">Solve K-Map</button>
+                        <button class="btn btn-secondary" onclick="resetForm()">Reset</button>
+                        <button class="btn btn-info" onclick="loadExample()">Load Example</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- K-Map Visualization -->
+            <section class="kmap-section">
+                <div class="kmap-card">
+                    <h2>K-Map Visualization</h2>
+                    <div id="kmapContainer" class="kmap-container">
+                        <!-- K-Map will be generated here -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Results Section -->
+            <section class="results-section">
+                <div class="results-card">
+                    <h2>Results & Analysis</h2>
+                    
+                    <div class="result-item">
+                        <h3>Simplified Expression (Using Boolean Laws):</h3>
+                        <div id="simplifiedResult" class="result-box">
+                            <code id="simplifiedExpression">-</code>
+                        </div>
+                    </div>
+
+                    <div class="result-item">
+                        <h3>Groups Formed:</h3>
+                        <div id="groupsList" class="groups-list">
+                            <p class="placeholder">No groups yet. Solve to see the groups.</p>
+                        </div>
+                    </div>
+
+                    <div class="result-item">
+                        <h3>Truth Table:</h3>
+                        <div id="truthTableContainer" class="truth-table-container">
+                            <!-- Truth table will be generated here -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Instructions Section -->
+            <section class="instructions-section">
+                <div class="instructions-card">
+                    <h2>How to Use</h2>
+                    <ol>
+                        <li><strong>Select Variables:</strong> Choose the number of variables (2, 3, or 4)</li>
+                        <li><strong>Enter Minterms:</strong> Enter the minterms as comma-separated numbers (0 to 2^n-1)</li>
+                        <li><strong>Click Solve:</strong> The K-Map will be generated and simplified</li>
+                        <li><strong>View Results:</strong> See the groups, simplified expression, and truth table</li>
+                        <li><strong>Interactive Cells:</strong> Click on cells to toggle them between 0 and 1</li>
+                    </ol>
+
+                    <h3>About K-Maps</h3>
+                    <p>
+                        A Karnaugh Map (K-Map) is a visual tool for simplifying Boolean algebra expressions. 
+                        It reduces the complexity of digital circuits by identifying groups of adjacent cells containing 1s, 
+                        which represent prime implicants. The groups must have powers of 2 sizes (1, 2, 4, or 8 cells).
+                    </p>
+
+                    <h3>Key Rules:</h3>
+                    <ul>
+                        <li>Groups must contain 1s that are adjacent horizontally or vertically</li>
+                        <li>Group size must be a power of 2 (1, 2, 4, 8, or 16)</li>
+                        <li>The top/bottom and left/right edges wrap around (toroidal)</li>
+                        <li>Overlap of groups is allowed</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 K-Map Solver | Digital Logic Simplification Tool</p>
+            <p>Made by: Satya Narayan Mishra</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
